@@ -38,11 +38,25 @@ while(restartGame) {
 
     // Verifies the user's entry for a range number is a number greater than zero
     // Note: All numbers, positive or negative, have a default boolean value of true, except for zero which has a default boolean value of false
-    while (!rangeNum || rangeNum < 1) 
-    {
+    while (!rangeNum || rangeNum < 1) {
         rangeNum = prompt(enterNumText);
         rangeNum = parseInt(rangeNum);
     };
+
+    // Creat the random number using the range number entered by the user
+    randomNum = Math.floor(Math.random()) * rangeNum + 1;
+
+    // Prompt user to enter a number of attempts (lives) allowed (e.g. the number of guesses)
+    lives = parseInt(prompt('Please enter a number of attempts allowed'))
+
+    // Verifying the user's entry for a number of attempts allowed is greater than zero and equal to or less than the range they set
+    while(!lives || lives < 1 || lives > rangeNum) {
+        lives = parseInt(prompt('Please enter a number of attempts allowed again'))
+
+    }
+
+    // Ask the user to enter a guess in the range they set
+    guess = prompt(`Please enter a guess from 1 to ${rangeNum}. You have ${lives} lives left.`)
 
 
     restartGame = false;
