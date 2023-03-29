@@ -58,7 +58,21 @@ while(restartGame) {
     // Ask the user to enter a guess in the range they set
     guess = prompt(`Please enter a guess from 1 to ${rangeNum}. You have ${lives} lives left.`)
 
+    // Continue looping until user guesses correct number or runs out of attempts. NOTE: as loop is currently set up the BREAK keyword is run
+       while (true) {
+        //Displays the number when a code word is entered
+        if (guess === `pickle`) {
+            alert(`The number is ${randomNum}`);
+        }
 
+        // Tries to convert user's guess into a number
+        guess = parseInt(guess);
+
+        // Move when needed
+
+        break;
+       } 
+       // Remove when needed
     restartGame = false;
 
 
