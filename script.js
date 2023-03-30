@@ -12,7 +12,7 @@ let restartGame = true;
 let rangeNum;
 
 // For storing the number of attempts the user has left
-let livesleft;
+let lives;
 
 // control-command-space to pull up emojis
 let cat = "😼";
@@ -44,7 +44,8 @@ while(restartGame) {
     };
 
     // Creat the random number using the range number entered by the user
-    randomNum = Math.floor(Math.random()) * rangeNum + 1;
+    randomNum = Math.floor(Math.random() * rangeNum) + 1;
+    console.log(`randomNum`, randomNum, `rangeNum`, rangeNum);
 
     // Prompt user to enter a number of attempts (lives) allowed (e.g. the number of guesses)
     lives = parseInt(prompt('Please enter a number of attempts allowed'))
@@ -62,27 +63,62 @@ while(restartGame) {
        while (true) {
         //Displays the number when a code word is entered
         if (guess === `pickle`) {
-            alert(`The number is ${randomNum}`);
+            alert(`A helpful hint...The number is ${randomNum}`);
         }
 
         // Tries to convert user's guess into a number
-        guess = parseInt(guess);
+        guess = parseInt(guess); 
 
-        // Move when needed
+        //Verify the user's guess is a number greater than zero and less than or equal to the range they set
+        while(!guess || guess < 1 || guess > rangeNum) {
+            guess = parseInt(prompt(`Please enter a number from 1 to ${rangeNum}`))
+        }
 
-        break;
+        // Remove life from after each incorrect guess
+        lives--;
+
+        // if else
+        if (guess === randomNum) {
+            alert(`CONGRATULATIONS! YOU GUESSED THE CORRECT NUMBER: ${randomNum}`);
+            break;
+            // Check if user has any lives left. If not the the game ends and the number is displayed to the user.
+        } else if (lives === 0) {
+            alert(`Sorry but you have run out of lives. the number was ${randomNum}`);
+            break;
+        } else if (guess == cat) {
+            lives +=2;
+            guess = prompt(`You found Cael's cat. You gained extra lives. You have ${lives} left.`)
+        } 
+        // Check if guess was too low
+        else if (guess < randomNum) {
+            guess = (prompt(`Too Low... You have ${lives} left.`));
+        } // Check if guess was too high ... last possibility
+        else {
+            guess = (prompt(`Too High... You have ${lives} left.`));
+        } 
+    }
+        playAgain = prompt(`Would you like to play again? Y for yes. N for no.`);
+        
+        // Loop until user submits a valid response
+        while (true) {
+            // Check if the user's answer is no
+            if (playAgain.toUpperCase === 'N') {
+                alert(`Thanks for playing!`);
+                restartGame = false;
+                break;
+            } else if (playAgain.toUpperCase === 'Y') {
+                // The game restarts
+                break;
+            } else {
+                playAgain = prompt(`Please enter Y or N`);
+            }
+
+
+        
+
+
        } 
-       // Remove when needed
-    restartGame = false;
-
-
-
-
-
-
-
-
-
+       
 
 };
 
